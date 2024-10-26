@@ -1,7 +1,7 @@
 from picamera2 import Picamera2, Preview
 from time import sleep
 
-picam2 = PiCamera2()
+picam2 = Picamera2()
 
 # Start preview
 picam2.start_preview(Preview.QTGL)
