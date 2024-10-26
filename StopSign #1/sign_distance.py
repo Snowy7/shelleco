@@ -2,6 +2,7 @@ import cv2
 from detection.stop_sign import GetFirstStopSignWidth
 from utils.stablizer import ExponentialMovingAverage, MovingAverage
 from picamera2 import Picamera2
+from led_controller import TurnOnLED, TurnOffLED
 
 
 Measured_Distance = 122
@@ -63,6 +64,12 @@ while True:
     cv2.putText( 
         frame, f"Distance: {round(est_d2,2)} CM", (30, 35),  
       fonts, 0.6, GREEN, 2) 
+    
+    # if the distance is less than 30 cm
+    if est_d2 < 50:
+        TurnOnLED()
+    else:
+        TurnOffLED()
     
     cv2.imshow('Overview', frame)
 
