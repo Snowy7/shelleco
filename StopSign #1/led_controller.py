@@ -4,6 +4,7 @@ LED_PIN = 17
 last_state = 0
 
 def TurnOnLED():
+    global last_state
     if last_state == 1:
         return
     chip = gpiod.Chip('gpiochip4')
@@ -14,6 +15,7 @@ def TurnOnLED():
     last_state = 1
     
 def TurnOffLED():
+    global last_state
     if last_state == 0:
         return
     chip = gpiod.Chip('gpiochip4')
