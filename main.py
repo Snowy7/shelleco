@@ -1,4 +1,4 @@
-from picamera2 import PiCamera2, Preview
+from picamera2 import Picamera2, Preview
 from time import sleep
 
 picam2 = PiCamera2()
