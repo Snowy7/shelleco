@@ -1,6 +1,8 @@
 import cv2
 from detection.stop_sign import GetFirstStopSignWidth
 from utils.stablizer import ExponentialMovingAverage, MovingAverage
+from picamera2 import Picamera2
+
 
 Measured_Distance = 122
 Known_Width = 0.28
@@ -37,12 +39,14 @@ Focal_Length = Focal_Length_Finder(Measured_Distance, Known_Width, ref_image_sig
 
 print(ref_image_sign_width, Focal_Length)
 
-cap = cv2.VideoCapture(0)
+picam2 = Picamera2()
+picam2.configure(picam2.create_preview_configuration(main={"format": 'XRGB8888', "size": (640, 480)}))
+picam2.start()
 
 ma = MovingAverage(window_size=2)
 ma2 = ExponentialMovingAverage(alpha=0.8)
-while cap.isOpened():
-    _, frame = cap.read()
+while True:
+    frame = picam2.capture_array()
 
     width = GetFirstStopSignWidth(frame)
     print(width)
@@ -63,7 +67,7 @@ while cap.isOpened():
     cv2.imshow('Overview', frame)
 
     if cv2.waitKey(1) == ord('q'):
-        cap.release()
+        picam2.release()
         cv2.destroyAllWindows()
         break
 
