@@ -66,7 +66,7 @@ while True:
       fonts, 0.6, GREEN, 2) 
     
     # if the distance is less than 30 cm
-    if est_d2 < 50:
+    if est_d2 < 80:
         TurnOnLED()
     else:
         TurnOffLED()
