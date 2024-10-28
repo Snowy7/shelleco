@@ -4,7 +4,7 @@ import utils
 from led_controller import TurnOnLED, TurnOffLED, RIGHT_LED_PIN, LEFT_LED_PIN
 
 cameraFeed= False
-videoPath = 'test.mp4'
+videoPath = 'project_video.mp4'
 cameraNo = 1
 frameWidth = 640
 frameHeight = 480
