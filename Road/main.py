@@ -74,9 +74,11 @@ while True:
     if targetMidPoint[0] < midPoint[0]:
         #print("Turn left")
         TurnOnLED(LEFT_LED_PIN)
+        TurnOffLED(RIGHT_LED_PIN)
     else:
         #print("Turn right")
         TurnOnLED(RIGHT_LED_PIN)
+        TurnOffLED(LEFT_LED_PIN)
 
 
     imgThres = cv2.cvtColor(imgThres,cv2.COLOR_GRAY2BGR)
