@@ -9,7 +9,7 @@ cameraNo = 1
 frameWidth = 640
 frameHeight = 480
 
-turnThreshold = 100
+turnThreshold = 15
 
 if cameraFeed:intialTracbarVals = [24,55,12,100] #  #wT,hT,wB,hB
 else:intialTracbarVals = [42,63,14,87]   #wT,hT,wB,hB
