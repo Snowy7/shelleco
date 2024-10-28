@@ -419,7 +419,7 @@ def stackImages(scale, imgArray):
 def drawLines(img, lane_curve):
     myWidth = img.shape[1]
     myHeight = img.shape[0]
-    print(myWidth, myHeight)
+
     for x in range(-30, 30):
         w = myWidth // 20
         cv2.line(
@@ -433,7 +433,7 @@ def drawLines(img, lane_curve):
         img,
         (int(lane_curve // 100) + myWidth // 2, myHeight - 30),
         (int(lane_curve // 100) + myWidth // 2, myHeight),
-        (0, 255, 0),
+        (0, 0, 255),
         3,
     )
     cv2.line(

@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import utils
+from led_controller import TurnOnLED, TurnOffLED, RIGHT_LED_PIN, LEFT_LED_PIN
 
 cameraFeed= False
 videoPath = 'test.mp4'
@@ -60,7 +61,22 @@ while True:
         lane_curve=00
         pass
 
-    imgFinal= utils.drawLines(imgFinal,lane_curve)
+    imgFinal = utils.drawLines(imgFinal,lane_curve)
+    targetMidPoint = (int(lane_curve // 100) + img.shape[1] // 2, img.shape[0])
+    midPoint = (img.shape[1] // 2, img.shape[0])
+    
+    # draw the target midpoint  
+    cv2.circle(imgFinal, targetMidPoint, 5, (0, 0, 255), -1)
+    # draw the midpoint
+    cv2.circle(imgFinal, midPoint, 5, (0, 255, 0), -1)
+    
+    # check if the target midpoint is on the left or right of the midpoint
+    if targetMidPoint[0] < midPoint[0]:
+        #print("Turn left")
+        TurnOnLED(LEFT_LED_PIN)
+    else:
+        #print("Turn right")
+        TurnOnLED(RIGHT_LED_PIN)
 
 
     imgThres = cv2.cvtColor(imgThres,cv2.COLOR_GRAY2BGR)
