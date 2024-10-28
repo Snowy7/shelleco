@@ -9,6 +9,8 @@ cameraNo = 1
 frameWidth = 640
 frameHeight = 480
 
+turnThreshold = 10
+
 if cameraFeed:intialTracbarVals = [24,55,12,100] #  #wT,hT,wB,hB
 else:intialTracbarVals = [42,63,14,87]   #wT,hT,wB,hB
 
@@ -70,15 +72,21 @@ while True:
     # draw the midpoint
     cv2.circle(imgFinal, midPoint, 5, (0, 255, 0), -1)
     
-    # check if the target midpoint is on the left or right of the midpoint
-    if targetMidPoint[0] < midPoint[0]:
-        #print("Turn left")
-        TurnOnLED(LEFT_LED_PIN)
-        TurnOffLED(RIGHT_LED_PIN)
-    else:
-        #print("Turn right")
-        TurnOnLED(RIGHT_LED_PIN)
-        TurnOffLED(LEFT_LED_PIN)
+    # draw a threshold zone (blue square)
+    cv2.rectangle(imgFinal, (midPoint[0] - turnThreshold, midPoint[1] - turnThreshold), (midPoint[0] + turnThreshold, midPoint[1] + turnThreshold), (255, 0, 0), 2)
+    
+    turnAmount = abs(targetMidPoint[0] - midPoint[0])
+    
+    if turnAmount > turnThreshold:
+        # check if the target midpoint is on the left or right of the midpoint
+        if targetMidPoint[0] < midPoint[0]:
+            #print("Turn left")
+            TurnOnLED(LEFT_LED_PIN)
+            TurnOffLED(RIGHT_LED_PIN)
+        else:
+            #print("Turn right")
+            TurnOnLED(RIGHT_LED_PIN)
+            TurnOffLED(LEFT_LED_PIN)
 
 
     imgThres = cv2.cvtColor(imgThres,cv2.COLOR_GRAY2BGR)
@@ -95,3 +103,5 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+TurnOffLED(LEFT_LED_PIN)
+TurnOffLED(RIGHT_LED_PIN)
