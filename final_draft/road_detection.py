@@ -1,38 +1,20 @@
 import numpy as np
 import cv2
-import utils
-#from led_controller import TurnOnLED, TurnOffLED, RIGHT_LED_PIN, LEFT_LED_PIN
-
-cameraFeed= False
-videoPath = 'test.mp4'
-cameraNo = 1
-frameWidth = 640
-frameHeight = 480
+from utils import utils
 
 turnThreshold = 15
-
-if cameraFeed:intialTracbarVals = [24,55,12,100] #  #wT,hT,wB,hB
-else:intialTracbarVals = [42,63,14,87]   #wT,hT,wB,hB
-
-if cameraFeed:
-    cap = cv2.VideoCapture(cameraNo)
-    cap.set(3, frameWidth)
-    cap.set(4, frameHeight)
-else:
-    cap = cv2.VideoCapture(videoPath)
+intialTracbarVals = [24,55,12,100]   #wT,hT,wB,hB
 count = 0
 noOfArrayValues = 10
 global arrayCurve, arrayCounter
 arrayCounter = 0
 arrayCurve = np.zeros([noOfArrayValues])
 myVals=[]
+
 utils.initializeTrackbars(intialTracbarVals)
 
-
-while True:
-    success, img = cap.read()
-    #img = cv2.imread('test2.jpg')
-    if cameraFeed== False:img = cv2.resize(img, (frameWidth, frameHeight), None)
+def proccessRoad(img, frameWidth, frameHeight):
+    global arrayCurve, arrayCounter, turnThreshold, noOfArrayValues, intialTracbarVals, myVals, count
     imgWarpPoints = img.copy()
     imgFinal = img.copy()
     imgCanny = img.copy()
@@ -94,17 +76,11 @@ while True:
 
     imgThres = cv2.cvtColor(imgThres,cv2.COLOR_GRAY2BGR)
     imgBlank = np.zeros_like(img)
-    imgStacked = utils.stackImages(0.7, ([img,imgUndis,imgWarpPoints],
+    imgStacked = utils.stackImages(0.4, ([img,imgUndis,imgWarpPoints],
                                          [imgColor, imgCanny, imgThres],
                                          [imgWarp,imgSliding,imgFinal]
                                          ))
-
+    
     cv2.imshow("PipeLine",imgStacked)
     cv2.imshow("Result", imgFinal)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-TurnOffLED(LEFT_LED_PIN)
-TurnOffLED(RIGHT_LED_PIN)
+    return imgStacked, imgFinal
