@@ -24,7 +24,7 @@ while True:
     img = camera.captureFrame()
     if img is not None:
         # Process the road
-        imgStages, imgFinal = proccessRoad(img, frameWidth, frameHeight)
+        imgFinal = proccessRoad(img, frameWidth, frameHeight)
         
         cv2.imshow('Input', img)
     else:
