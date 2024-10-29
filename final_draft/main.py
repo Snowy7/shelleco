@@ -28,7 +28,7 @@ while True:
     img = camera.captureFrame()
     if img is not None:
         # Process the road
-        imgFinal, turnAmount, turnDir = proccessRoad(img, frameWidth, frameHeight)
+        imgFinal, turnAmount, turnDir = proccessRoad(img, frameWidth, frameHeight, turnThreshold)
         if turnAmount > turnThreshold:
             # check if the target midpoint is on the left or right of the midpoint
             if turnDir < 0:
