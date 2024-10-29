@@ -2,7 +2,6 @@ import numpy as np
 import cv2
 from utils import utils
 
-turnThreshold = 15
 intialTracbarVals = [24,55,12,100]   #wT,hT,wB,hB
 count = 0
 noOfArrayValues = 10
@@ -58,6 +57,7 @@ def proccessRoad(img, frameWidth, frameHeight):
     cv2.rectangle(imgFinal, (midPoint[0] - turnThreshold, midPoint[1] - turnThreshold), (midPoint[0] + turnThreshold, midPoint[1] + turnThreshold), (255, 0, 0), 2)
     
     turnAmount = abs(targetMidPoint[0] - midPoint[0])
+    turnDir = -1 if targetMidPoint[0] < midPoint[0] else 1
     
     """ if turnAmount > turnThreshold:
         # check if the target midpoint is on the left or right of the midpoint
@@ -85,4 +85,4 @@ def proccessRoad(img, frameWidth, frameHeight):
     
     #cv2.imshow("PipeLine",imgStacked)
     cv2.imshow("Result", imgFinal)
-    return imgFinal
+    return imgFinal, turnAmount
