@@ -76,6 +76,9 @@ def proccessRoad(img, frameWidth, frameHeight):
 
     imgThres = cv2.cvtColor(imgThres,cv2.COLOR_GRAY2BGR)
     imgBlank = np.zeros_like(img)
+    # convert the picamera img to a cv2 image before stacking
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    #stacking
     imgStacked = utils.stackImages(0.4, ([img,imgUndis,imgWarpPoints],
                                          [imgColor, imgCanny, imgThres],
                                          [imgWarp,imgSliding,imgFinal]
