@@ -85,4 +85,4 @@ def proccessRoad(img, frameWidth, frameHeight, turnThreshold):
     
     #cv2.imshow("PipeLine",imgStacked)
     cv2.imshow("Result", imgFinal)
-    return imgFinal, turnAmount
+    return imgFinal, turnAmount, turnDir
