@@ -78,11 +78,11 @@ def proccessRoad(img, frameWidth, frameHeight):
     imgBlank = np.zeros_like(img)
     # picam fix array dimensions
     #stacking
-    imgStacked = utils.stackImages(0.4, ([imgUndis, imgUndis, imgWarpPoints],
-                                         [imgColor, imgCanny, imgThres],
-                                         [imgWarp,imgSliding,imgFinal]
-                                         ))
+    #imgStacked = utils.stackImages(0.4, ([imgUndis, imgUndis, imgWarpPoints],
+    #                                     [imgColor, imgCanny, imgThres],
+    #                                     [imgWarp,imgSliding,imgFinal]
+    #                                     ))
     
-    cv2.imshow("PipeLine",imgStacked)
+    #cv2.imshow("PipeLine",imgStacked)
     cv2.imshow("Result", imgFinal)
-    return imgStacked, imgFinal
+    return imgFinal
