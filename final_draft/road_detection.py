@@ -76,13 +76,9 @@ def proccessRoad(img, frameWidth, frameHeight):
 
     imgThres = cv2.cvtColor(imgThres,cv2.COLOR_GRAY2BGR)
     imgBlank = np.zeros_like(img)
-    # convert the picamera img to a cv2 image before stacking
-    # picam img has 3 channels and cv2 needs 4 channels
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    # fill the cv2 image with the picamera image
-    img = cv2.copyMakeBorder(img, 0, 0, 0, 0, cv2.BORDER_REPLICATE)
+    # picam fix array dimensions
     #stacking
-    imgStacked = utils.stackImages(0.4, ([img,imgUndis,imgWarpPoints],
+    imgStacked = utils.stackImages(0.4, ([imgUndis, imgUndis, imgWarpPoints],
                                          [imgColor, imgCanny, imgThres],
                                          [imgWarp,imgSliding,imgFinal]
                                          ))
