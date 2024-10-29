@@ -12,8 +12,8 @@ myVals=[]
 
 utils.initializeTrackbars(intialTracbarVals)
 
-def proccessRoad(img, frameWidth, frameHeight):
-    global arrayCurve, arrayCounter, turnThreshold, noOfArrayValues, intialTracbarVals, myVals, count
+def proccessRoad(img, frameWidth, frameHeight, turnThreshold):
+    global arrayCurve, arrayCounter, noOfArrayValues, intialTracbarVals, myVals, count
     imgWarpPoints = img.copy()
     imgFinal = img.copy()
     imgCanny = img.copy()
