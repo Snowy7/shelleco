@@ -10,7 +10,7 @@ RIGHT_PIN = 27
 LEFT_PIN = 22
 
 current_angle = 0
-time_to_full_angle = 0.5
+time_to_full_angle = 0.22
 
 # here we control the steernig
 # we give High to the pin we want to turn until we reach the desired angle then we give low to all pins untill they reach the 0 angle
@@ -50,11 +50,11 @@ async def forward():
     led.SetVoltage(RIGHT_PIN, 0)
     led.SetVoltage(LEFT_PIN, 0)
     
-    if current_angle == 1:
+    if current_angle == -1:
         led.SetVoltage(LEFT_PIN, 1)
         await asyncio.sleep(time_to_full_angle)
         led.SetVoltage(LEFT_PIN, 0)
-    elif current_angle == -1:
+    elif current_angle == 1:
         led.SetVoltage(RIGHT_PIN, 1)
         await asyncio.sleep(time_to_full_angle)
         led.SetVoltage(RIGHT_PIN, 0)
