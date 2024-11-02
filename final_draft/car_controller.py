@@ -19,7 +19,7 @@ time_to_full_angle = 0.22
 async def left():
     global current_angle
     print("left")
-    led.SetVoltage(FRWARD_PIN, 1)
+    led.SetVoltage(FRWARD_PIN, 0)
     led.SetVoltage(RIGHT_PIN, 0)
     led.SetVoltage(LEFT_PIN, 1)
     if current_angle == -1:
@@ -33,7 +33,7 @@ async def left():
 async def right():
     global current_angle
     print("right")
-    led.SetVoltage(FRWARD_PIN, 1)
+    led.SetVoltage(FRWARD_PIN, 0)
     led.SetVoltage(LEFT_PIN, 0)
     led.SetVoltage(RIGHT_PIN, 1)
     if current_angle == 1:

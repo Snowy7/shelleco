@@ -1,5 +1,7 @@
 import cv2
 from sign_distance import proccess_stop_sign
+from obstacle import obstacle_avoidance
+import car_controller as cc
 
 # get the system to check if we are windows or raspberry pi and import the correct libraries
 import platform
@@ -24,21 +26,30 @@ while True:
     if img is None:
         print("No frame")
         continue
-    
+
     signFrame, signDistance = proccess_stop_sign(img)
-    
+
     forward = 1
-    
+
     if signDistance < 170:
         forward = 0
-        print("Stop sign detected")
-    
+    else:
+
+        direction = obstacle_avoidance(img)
+
+        if direction == 0:
+            cc.forward()
+        elif direction == -1:
+            cc.left()
+        elif direction == 1:
+            cc.right()
+
     led.SetVoltage(FORWARD_PIN, forward)
-    
+
     # show the image
-    cv2.imshow('Input', signFrame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    cv2.imshow("Input", signFrame)
+    if cv2.waitKey(1) & 0xFF == ord("q"):
         break
-    
+
 camera.stop()
 cv2.destroyAllWindows()
