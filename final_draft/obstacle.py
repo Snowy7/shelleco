@@ -22,6 +22,9 @@ cap = cv2.VideoCapture(0)  # Creating object to capturing frame from inbult came
 StepSize = 5
 def obstacle_avoidance(frame):
     #_, frame = cap.read()  # Reading the frame from the object.
+    if frame is None:
+        print("No frame")
+        return 0
 
     original_frame = frame.copy()  # Copy of frame which will be used for to compare with other images after appling various operations.
     img_edgerep = frame.copy()  # Copy of frame which will be used for edge representation.
