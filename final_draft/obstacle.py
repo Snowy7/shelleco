@@ -18,7 +18,6 @@ def make_chunks(EdgeArray, size_of_chunk):
 
 # Code to draw edge representation.
 
-cap = cv2.VideoCapture(0)  # Creating object to capturing frame from inbult camera(0) or the external camera(1)
 StepSize = 5
 def obstacle_avoidance(frame):
     #_, frame = cap.read()  # Reading the frame from the object.
@@ -114,4 +113,3 @@ def obstacle_avoidance(frame):
     return dirNum
 
 cv2.destroyAllWindows
-cap.release()
