@@ -2,7 +2,7 @@ import platform
 if platform.system() == "Windows":
     from final_draft.utils import ocv_camera as camera
 else:
-    from final_draft.utils import pi_camera as camera
+    from final_draft.utils import ocv_camera as camera
     
 import cv2
 

@@ -10,7 +10,7 @@ if platform.system() == "Windows":
     from utils import ocv_camera as camera
     from utils import led_controller_fake as led
 else:
-    from utils import pi_camera as camera
+    from utils import ocv_camera as camera
     from utils import gpio_controller as led
 
 # all we want to do is walk straight untill we see a stop sign we stop
