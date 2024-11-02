@@ -29,7 +29,7 @@ while True:
     
     forward = 1
     
-    if signDistance < 100:
+    if signDistance < 170:
         forward = 0
         print("Stop sign detected")
     
