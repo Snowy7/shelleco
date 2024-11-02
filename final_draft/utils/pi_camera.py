@@ -5,7 +5,7 @@ frame = None
 
 def initCamera(width, height):
     picam2.configure(
-        picam2.create_preview_configuration(main={"format": "XRGB8888", "size": (width, height)})
+        picam2.create_preview_configuration(main={"format": "BGR888", "size": (width, height)})
     )
     picam2.start()
 
