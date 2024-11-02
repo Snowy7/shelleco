@@ -31,7 +31,7 @@ while True:
 
     forward = 1
 
-    if signDistance < 170:
+    if signDistance < 200:
         forward = 0
     else:
 
