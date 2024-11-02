@@ -60,6 +60,13 @@ async def forward():
         led.SetVoltage(RIGHT_PIN, 0)
     current_angle = 0
     led.SetVoltage(FRWARD_PIN, 1)
+
+def reset():
+    global current_angle
+    led.SetVoltage(FRWARD_PIN, 0)
+    led.SetVoltage(RIGHT_PIN, 0)
+    led.SetVoltage(LEFT_PIN, 0)
+    current_angle = 0
     
 # if main show a control panel
 if __name__ == "__main__":
@@ -76,5 +83,8 @@ if __name__ == "__main__":
     
     right_button = tk.Button(root, text="Right", command=lambda: asyncio.run(right()))
     right_button.pack()
+    
+    reset_button = tk.Button(root, text="Reset", command=reset)
+    reset_button.pack()
     
     root.mainloop()
