@@ -1,6 +1,10 @@
 import cv2
+import platform
 
-cap = cv2.VideoCapture(0)
+if platform.system() == "Windows":
+    cap = cv2.VideoCapture(0)
+else:
+    cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
 frame = None
 
 
