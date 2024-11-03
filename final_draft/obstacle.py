@@ -102,13 +102,13 @@ def obstacle_avoidance(frame):
         # Code to display the results
 
     if testmode == 1:
-        cv2.imshow("Original_Frame", original_frame)
-        cv2.imshow("Canny", edges)
-        cv2.imshow("Threshold", thresh)
+        #cv2.imshow("Original_Frame", original_frame)
+        #cv2.imshow("Canny", edges)
+        #cv2.imshow("Threshold", thresh)
         cv2.imshow("Edge_separation", img_edgerep)
         font = cv2.FONT_HERSHEY_SIMPLEX
         navigation = cv2.putText(frame, direction, (275, 50), font, 1, (0, 0, 255), 2, cv2.LINE_AA)
-        cv2.imshow("Navigation", navigation)
+        #cv2.imshow("Navigation", navigation)
         
     return dirNum
 
