@@ -54,5 +54,6 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 
-camera.stop()
 cv2.destroyAllWindows()
+camera.stop()
+stopCam.stop()
