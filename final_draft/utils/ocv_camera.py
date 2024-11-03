@@ -4,7 +4,7 @@ import platform
 if platform.system() == "Windows":
     cap = cv2.VideoCapture(0)
 else:
-    cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
+    cap = cv2.VideoCapture("/dev/video8", cv2.CAP_V4L2)
 frame = None
 
 
