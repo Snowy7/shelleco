@@ -3,7 +3,7 @@ import numpy as np
 import math
 import os
 
-testmode = 0  # To display images to verify. Set to zero if not intrested in displaying images.
+testmode = 1 # To display images to verify. Set to zero if not intrested in displaying images.
 
 
 # make_chunks function creats chunks.
