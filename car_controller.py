@@ -96,7 +96,7 @@ if __name__ == "__main__":
     right_button = tk.Button(root, text="Right", command=lambda: asyncio.run(right()))
     right_button.pack()
     
-    reset_button = tk.Button(root, text="Reset", command=reset)
+    reset_button = tk.Button(root, text="Reset", command=lambda: asyncio.run(reset()))
     reset_button.pack()
     
     root.mainloop()
