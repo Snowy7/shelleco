@@ -16,7 +16,7 @@ time_to_full_angle = 0.15
 # we give High to the pin we want to turn until we reach the desired angle then we give low to all pins untill they reach the 0 angle
 
 # async left
-async def left():
+async def left_async():
     global current_angle
     print("left")
     led.SetVoltage(FRWARD_PIN, 1)
@@ -31,7 +31,7 @@ async def left():
     led.SetVoltage(LEFT_PIN, 0)
     
 # async right
-async def right():
+async def right_async():
     global current_angle
     print("right")
     led.SetVoltage(FRWARD_PIN, 1)
@@ -45,7 +45,7 @@ async def right():
     current_angle = 1
     led.SetVoltage(RIGHT_PIN, 0)
     
-async def forward():
+async def forward_async():
     # turn the wheels to the forward position
     global current_angle
     print("forward")
@@ -63,7 +63,7 @@ async def forward():
     current_angle = 0
     led.SetVoltage(FRWARD_PIN, 1)
 
-async def reset():
+async def reset_async():
     global current_angle
     led.SetVoltage(FRWARD_PIN, 0)
     led.SetVoltage(RIGHT_PIN, 0)
@@ -80,6 +80,18 @@ async def reset():
     
     current_angle = 0
     
+def left():
+    asyncio.run(left_async())
+
+def right():
+    asyncio.run(right_async())
+
+def forward():
+    asyncio.run(forward_async())
+    
+def reset():
+    asyncio.run(reset_async())
+    
 # if main show a control panel
 if __name__ == "__main__":
     import tkinter as tk
@@ -87,16 +99,16 @@ if __name__ == "__main__":
     root.title("Car Controller")
     root.geometry("200x200")
     
-    forward_button = tk.Button(root, text="Forward", command=lambda: asyncio.run(forward()))
+    forward_button = tk.Button(root, text="Forward", command=lambda: asyncio.run(forward_async()))
     forward_button.pack()
     
-    left_button = tk.Button(root, text="Left", command=lambda: asyncio.run(left()))
+    left_button = tk.Button(root, text="Left", command=lambda: asyncio.run(left_async()))
     left_button.pack()
     
-    right_button = tk.Button(root, text="Right", command=lambda: asyncio.run(right()))
+    right_button = tk.Button(root, text="Right", command=lambda: asyncio.run(right_async()))
     right_button.pack()
     
-    reset_button = tk.Button(root, text="Reset", command=lambda: asyncio.run(reset()))
+    reset_button = tk.Button(root, text="Reset", command=lambda: asyncio.run(reset_async()))
     reset_button.pack()
     
     root.mainloop()
