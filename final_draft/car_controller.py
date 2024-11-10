@@ -10,7 +10,7 @@ RIGHT_PIN = 27
 LEFT_PIN = 22
 
 current_angle = 0
-time_to_full_angle = 0.22
+time_to_full_angle = 0.15
 
 # here we control the steernig
 # we give High to the pin we want to turn until we reach the desired angle then we give low to all pins untill they reach the 0 angle
