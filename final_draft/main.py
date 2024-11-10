@@ -2,6 +2,7 @@ import cv2
 from sign_distance import proccess_stop_sign
 from obstacle import obstacle_avoidance
 import car_controller as cc
+import asyncio
 
 # get the system to check if we are windows or raspberry pi and import the correct libraries
 import platform
@@ -22,38 +23,41 @@ camera.initCamera(frameWidth, frameHeight)
 stopCam.initCamera(frameWidth, frameHeight)
 
 # Main loop
-while True:
-    img = camera.captureFrame()
-    img2 = stopCam.captureFrame()
-    if img is None:
-        print("No frame")
-        continue
+async def Loop():
+    while True:
+        img = camera.captureFrame()
+        img2 = stopCam.captureFrame()
+        if img is None:
+            print("No frame")
+            continue
 
-    signFrame, signDistance = proccess_stop_sign(img2)
+        signFrame, signDistance = proccess_stop_sign(img2)
 
-    forward = 1
+        forward = 1
 
-    if signDistance < 200:
-        forward = 0
-    else:
+        if signDistance < 200:
+            forward = 0
+        else:
 
-        direction = obstacle_avoidance(img)
+            direction = obstacle_avoidance(img)
 
-        if direction == 0:
-            cc.forward()
-        elif direction == -1:
-            cc.left()
-        elif direction == 1:
-            cc.right()
+            if direction == 0:
+                await cc.forward_async()
+            elif direction == -1:
+                await cc.left_async()
+            elif direction == 1:
+                await cc.right_async()
 
-    led.SetVoltage(FORWARD_PIN, forward)
+        led.SetVoltage(FORWARD_PIN, forward)
 
-    # show the image
-    cv2.imshow("Stop Sign", signFrame)
-    cv2.imshow("Obstacle Avoidance", img)
-    if cv2.waitKey(1) & 0xFF == ord("q"):
-        break
+        # show the image
+        cv2.imshow("Stop Sign", signFrame)
+        cv2.imshow("Obstacle Avoidance", img)
+        if cv2.waitKey(1) & 0xFF == ord("q"):
+            break
 
+
+asyncio.run(Loop())
 cv2.destroyAllWindows()
 camera.stop()
 stopCam.stop()
