@@ -63,11 +63,21 @@ async def forward():
     current_angle = 0
     led.SetVoltage(FRWARD_PIN, 1)
 
-def reset():
+async def reset():
     global current_angle
     led.SetVoltage(FRWARD_PIN, 0)
     led.SetVoltage(RIGHT_PIN, 0)
     led.SetVoltage(LEFT_PIN, 0)
+    
+    if current_angle == 1:
+        led.SetVoltage(LEFT_PIN, 1)
+        await asyncio.sleep(time_to_full_angle)
+        led.SetVoltage(LEFT_PIN, 0)
+    elif current_angle == -1:
+        led.SetVoltage(RIGHT_PIN, 1)
+        await asyncio.sleep(time_to_full_angle)
+        led.SetVoltage
+    
     current_angle = 0
     
 # if main show a control panel
