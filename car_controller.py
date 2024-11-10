@@ -76,7 +76,7 @@ async def reset():
     elif current_angle == -1:
         led.SetVoltage(RIGHT_PIN, 1)
         await asyncio.sleep(time_to_full_angle)
-        led.SetVoltage
+        led.SetVoltage(RIGHT_PIN, 0)
     
     current_angle = 0
     
@@ -86,10 +86,6 @@ if __name__ == "__main__":
     root = tk.Tk()
     root.title("Car Controller")
     root.geometry("200x200")
-    
-    # draw a slider for the time_to_full_angle from 0 to 1
-    time_to_full_angle_slider = tk.Scale(root, from_=0, to=1, resolution=0.01, orient=tk.HORIZONTAL, label="Time to full angle", variable=time_to_full_angle)
-    time_to_full_angle_slider.pack()
     
     forward_button = tk.Button(root, text="Forward", command=lambda: asyncio.run(forward()))
     forward_button.pack()
