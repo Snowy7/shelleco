@@ -87,6 +87,10 @@ if __name__ == "__main__":
     root.title("Car Controller")
     root.geometry("200x200")
     
+    # draw a slider for the time_to_full_angle from 0 to 1
+    time_to_full_angle_slider = tk.Scale(root, from_=0, to=1, resolution=0.01, orient=tk.HORIZONTAL, label="Time to full angle", variable=time_to_full_angle)
+    time_to_full_angle_slider.pack()
+    
     forward_button = tk.Button(root, text="Forward", command=lambda: asyncio.run(forward()))
     forward_button.pack()
     
