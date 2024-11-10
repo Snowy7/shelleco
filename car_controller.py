@@ -22,11 +22,12 @@ async def left():
     led.SetVoltage(FRWARD_PIN, 1)
     led.SetVoltage(RIGHT_PIN, 0)
     led.SetVoltage(LEFT_PIN, 1)
-    if current_angle == -1:
+    if current_angle == 1:
+        print("here")
         await asyncio.sleep(time_to_full_angle * 2)
     else:
         await asyncio.sleep(time_to_full_angle)
-    current_angle = 1
+    current_angle = -1
     led.SetVoltage(LEFT_PIN, 0)
     
 # async right
@@ -36,11 +37,12 @@ async def right():
     led.SetVoltage(FRWARD_PIN, 1)
     led.SetVoltage(LEFT_PIN, 0)
     led.SetVoltage(RIGHT_PIN, 1)
-    if current_angle == 1:
+    if current_angle == -1:
+        print("here")
         await asyncio.sleep(time_to_full_angle * 2)
     else:
         await asyncio.sleep(time_to_full_angle)
-    current_angle = -1
+    current_angle = 1
     led.SetVoltage(RIGHT_PIN, 0)
     
 async def forward():
@@ -50,11 +52,11 @@ async def forward():
     led.SetVoltage(RIGHT_PIN, 0)
     led.SetVoltage(LEFT_PIN, 0)
     
-    if current_angle == -1:
+    if current_angle == 1:
         led.SetVoltage(LEFT_PIN, 1)
         await asyncio.sleep(time_to_full_angle)
         led.SetVoltage(LEFT_PIN, 0)
-    elif current_angle == 1:
+    elif current_angle == -1:
         led.SetVoltage(RIGHT_PIN, 1)
         await asyncio.sleep(time_to_full_angle)
         led.SetVoltage(RIGHT_PIN, 0)
