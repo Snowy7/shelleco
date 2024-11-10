@@ -85,7 +85,7 @@ def obstacle_avoidance(frame):
     farthest_point = (min(avg_of_chunk))
     # print(farthest_point)
 
-    if forwardEdge[0] > 350:  # Checking for the object at the front is close to bot.
+    if forwardEdge[0] > 150:  # Checking for the object at the front is close to bot.
         if farthest_point[1] < 310:  # Checking for the farthest_point on the left of the frame.
             direction = "Move left "
             dirNum = -1
