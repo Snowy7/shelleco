@@ -1,9 +1,9 @@
 import asyncio
 import platform
 if platform.system() == "Windows":
-    from final_draft.utils import led_controller_fake as led
+    from utils import led_controller_fake as led
 else:
-    from final_draft.utils import gpio_controller as led
+    from utils import gpio_controller as led
 
 FRWARD_PIN = 17
 RIGHT_PIN = 27
@@ -15,14 +15,9 @@ time_to_full_angle = 0.15
 # here we control the steernig
 # we give High to the pin we want to turn until we reach the desired angle then we give low to all pins untill they reach the 0 angle
 
-isTurning = False
-
 # async left
 async def left_async():
-    global current_angle, isTurning
-    if isTurning:
-        return
-    isTurning = True
+    global current_angle
     print("left")
     led.SetVoltage(FRWARD_PIN, 1)
     led.SetVoltage(RIGHT_PIN, 0)
@@ -35,14 +30,9 @@ async def left_async():
     current_angle = -1
     led.SetVoltage(LEFT_PIN, 0)
     
-    isTurning = False
-    
 # async right
 async def right_async():
-    global current_angle, isTurning
-    if isTurning:
-        return
-    isTurning = True
+    global current_angle
     print("right")
     led.SetVoltage(FRWARD_PIN, 1)
     led.SetVoltage(LEFT_PIN, 0)
@@ -54,14 +44,10 @@ async def right_async():
         await asyncio.sleep(time_to_full_angle)
     current_angle = 1
     led.SetVoltage(RIGHT_PIN, 0)
-    isTurning = False
     
 async def forward_async():
     # turn the wheels to the forward position
-    global current_angle, isTurning
-    if isTurning:
-        return
-    isTurning = True
+    global current_angle
     print("forward")
     led.SetVoltage(RIGHT_PIN, 0)
     led.SetVoltage(LEFT_PIN, 0)
@@ -76,7 +62,6 @@ async def forward_async():
         led.SetVoltage(RIGHT_PIN, 0)
     current_angle = 0
     led.SetVoltage(FRWARD_PIN, 1)
-    isTurning = False
 
 async def reset_async():
     global current_angle
